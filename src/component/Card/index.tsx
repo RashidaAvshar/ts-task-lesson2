@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Iproduct } from '../../model';
 import { CardProps } from './model';
 
@@ -6,6 +7,7 @@ type CardPropsDetail = {
 }
 
 const Card = ({data}: CardPropsDetail) => {
+    const [show,setShow] = useState<Boolean>(false)
 
   return (
    
@@ -21,19 +23,24 @@ const Card = ({data}: CardPropsDetail) => {
         className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
         {data.title}
       </h5>
-      <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+      
+      <button onClick={()=>{
+        setShow(!show)
+      }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+  {!show ? "Show description" : "Hide"}
+</button>
+      
+      {
+        show ? 
+        <>
+        <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
         {data.description}
       </p>
       <p className="text-green-800 dark:text-neutral-300 text-xl font-medium" >
         {data.price} $
       </p>
-      <button
-        type="button"
-        className="inline-block rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-black shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
-        data-te-ripple-init
-        data-te-ripple-color="light">
-        Button
-      </button>
+        </> : ""
+      }
     </div>
   </div>
 </div>
